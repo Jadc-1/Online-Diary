@@ -17,3 +17,7 @@ class Diario(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+    def set_tags(self, list_Tags, reset=False):
+        if not reset:
+            existing_tags = set()
