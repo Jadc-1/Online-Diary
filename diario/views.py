@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .models import Pessoas
 
 # Create your views here.
 def home(request):
@@ -18,3 +19,13 @@ def escrever(request):
 def cadastrar_pessoa(request):
     if request.method == "GET":
         return render(request, 'pessoa.html')
+    elif request.method == "POST":
+        nome = request.POST.get('nome')
+        foto = request.FILES.get('foto')
+        
+        pessoa = Pessoas(
+            nome = nome,
+            foto = foto
+        )
+        pessoa.save()
+        return redirect('escrever')
