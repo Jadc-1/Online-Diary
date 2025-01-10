@@ -14,3 +14,7 @@ def escrever(request):
         pessoas = request.POST.getlist()
         texto = request.POST.get()
         return HttpResponse(F'{titulo} - {tags} - {pessoas} - {texto}')
+    
+def cadastrar_pessoa(request):
+    if request.method == "GET":
+        return render(request, 'pessoa.html')
