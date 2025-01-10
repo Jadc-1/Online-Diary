@@ -18,6 +18,12 @@ class Diario(models.Model):
     def __str__(self):
         return self.titulo
     
-    def set_tags(self, list_Tags, reset=False):
+    def get_tags(self): ## Ta pegando as tags, definida acima, caso exista tags salvas, ele separa por , caso não tenha, ele retorna uma chave vazia
+        return self.tags.split(',') if self.tags else []
+    
+    def set_tags(self, list_tags, reset=False):
         if not reset:
-            existing_tags = set()
+            existing_tags = set(self.get_tags())
+            list_tags = existing_tags.union(set(list_tags)) ##evita repetição de tags, com union.
+
+        self.tags = ','.join(list_tags)
