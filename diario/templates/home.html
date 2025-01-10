@@ -119,4 +119,21 @@
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: {{nomes|safe}}, <!--eixo X do gráfico e safe para proteger de ataque (django)--> 
+      datasets: [{
+        data: {{qtds|safe}}, <!--Eixo Y do gráfico-->
+        borderWidth: 1
+      }]
+    },
+    
+  });
+</script>
+
 {% endblock 'body' %}
